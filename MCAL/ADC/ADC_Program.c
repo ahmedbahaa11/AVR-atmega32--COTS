@@ -279,6 +279,13 @@ u16 ADC_u16ReadASynchronus ( u8 Copy_u8ChannelNumber ,  void (*Local_PvoidCallBa
     }
 }
 
+void ADC_getTemperature ( u8 Copy_u8ChannelNumber , Temperature * Outdata )
+{
+    Outdata->digitalValue = ADC_u16ReadSynchronus(Copy_u8ChannelNumber);
+    Outdata->analogValue  = (Outdata->digitalValue * 5000UL) / 1024;
+    Outdata->tempValue    =  Outdata->analogValue / 10 ;
+}
+
 void __vector_16 (void)   __attribute__((signal));
 void __vector_16 (void)
 {

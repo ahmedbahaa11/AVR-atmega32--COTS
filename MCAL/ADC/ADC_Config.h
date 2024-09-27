@@ -20,28 +20,28 @@
 #define     RESERVED                     2
 #define     INTERNAL                     3
 /*===============================================*/
-#define     REFERENCE_VOLTAGE             AREF
+#define     REFERENCE_VOLTAGE           AVCC
 /*===============================================*/
 /*     Select RIGHT or LEFT Adjust      */
 /*--------------------------------------*/
 #define     RIGHT                        0
 #define     LEFT                         1
 /*===============================================*/
-#define     ADJUST                        RIGHT
+#define     ADJUST                     RIGHT
 /*===============================================*/
 /*        ADC ENABLE or DISABLE         */
 /*--------------------------------------*/
 #define     DISABLE                      0
 #define     ENABLE                       1
 /*===============================================*/
-#define     ADEN                         ENABLE
+#define     ADEN                       ENABLE
 /*===============================================*/
 /*    AUTO Trigger Enable or Disable    */
 /*--------------------------------------*/
 #define     DISABLE                      0
 #define     ENABLE                       1
 /*===============================================*/
-#define     ADATE                        DISABLE
+#define     ADATE                      DISABLE
 /*===============================================*/
 /*       ADC Auto Trigger Source        */
 /*--------------------------------------*/
@@ -54,14 +54,14 @@
 #define  Timer_Counter1_Overflow         6
 #define  Timer_Counter1_Capture_Event    7
 /*===============================================*/
-#define  AUTO_TRIGGER_SOURCE     External_Interrupt_Request_0
+#define  AUTO_TRIGGER_SOURCE     Free_Running_Mode
 /*===============================================*/
 /*    ADC Interrupt Enable or Disable   */
 /*--------------------------------------*/
 #define     DISABLE                      0
 #define     ENABLE                       1
 /*===============================================*/
-#define     ADIE                         DISABLE
+#define     ADIE                       DISABLE
 /*===============================================*/
 /*        ADC Prescaler Selection        */
 /*---------------------------------------*/
@@ -74,7 +74,7 @@
 #define     PRESCALER_DIVISION_BY_64      64
 #define     PRESCALER_DIVISION_BY_128     128
 /*===============================================*/
-#define     PRESCALER           PRESCALER_DIVISION_BY_2
+#define     PRESCALER           NOT_USE_PRESCALER
 /*===============================================*/
 
 

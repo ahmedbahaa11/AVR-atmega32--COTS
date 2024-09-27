@@ -22,6 +22,11 @@
 #define     ADC6                    6
 #define     ADC7                    7
 
+typedef struct temp_ADC {
+    u16 digitalValue;
+    u16 analogValue;
+    u16 tempValue;
+}Temperature;
 
 
 
@@ -38,6 +43,9 @@ void ADC_voidInit (void);
 /* Fun. Return : u16                                                                            */
 /************************************************************************************************/
 u16 ADC_u16ReadSynchronus ( u8 Copy_u8ChannelNumber ) ;
+
 u16 ADC_u16ReadASynchronus ( u8 Copy_u8ChannelNumber ,  void (*Local_PointerToFunction) (void) ) ;
+
+void ADC_getTemperature ( u8 Copy_u8ChannelNumber , Temperature * Outdata );
 
 #endif
