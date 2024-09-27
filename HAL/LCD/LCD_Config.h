@@ -11,9 +11,7 @@
 /* File Gaurd by ifndef & endif */
 #ifndef LCD_CONFIG_H
 #define LCD_CONFIG_H
-
 /* LCD Hardware Configration with atmega PORTS & PINS */
-
 #define LCD_CONTROL_PORT         PORTC
 #define LCD_DATA_PORT            PORTD
 

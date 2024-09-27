@@ -33,9 +33,9 @@
 /********************************** [5]  LCD_voidWrite_u32Number       **************************/
 /********************************** [6]  LCD_voidGoTo_XY               **************************/
 /********************************** [7]  LCD_voidDrawPattern           **************************/
-/********************************** [8] LCD_voidWritePattern           **************************/ 
+/********************************** [8]  LCD_voidWritePattern          **************************/ 
 /********************************** [9]  LCD_voidClearDisplay          **************************/
-/********************************** [10]  LCD_voidClearGrid            **************************/
+/********************************** [10] LCD_voidClearGrid             **************************/
 /********************************** [11] LCD_voidClearLine             **************************/
 /********************************** [12] LCD_voidShiftLeft             **************************/
 /********************************** [13] LCD_voidShiftRight            **************************/
@@ -73,7 +73,6 @@ void LCD_voidInit (void)
     LCD_voidWriteCommand ( ENTRY_MODE_INCREASE_NO_SHIFT );
     _delay_ms(1);     //TIMER0_voidSetBusyWait_ms(1);
 
-
 }
 /*****************************************************************************************/
 /* Function Name : [2]  LCD_voidWriteCommand                                             */
@@ -94,7 +93,7 @@ void LCD_voidWriteCommand ( u8 Copy_u8Command )
 
     /* Falling Edge on E PIN to make LCD Read This Command */
     DIO_voidSetPinValue (LCD_CONTROL_PORT,E_PIN,HIGH);
-    //_delay_ms(1);
+    _delay_ms(2);
     DIO_voidSetPinValue (LCD_CONTROL_PORT,E_PIN,LOW);
 }
 /*****************************************************************************************/
@@ -116,7 +115,7 @@ void LCD_voidWriteChar ( u8 Copy_u8Char )
 
     /* Falling Edge on E PIN to make LCD Read This Command */
     DIO_voidSetPinValue (LCD_CONTROL_PORT,E_PIN,HIGH);
-    //_delay_ms(1);
+    _delay_ms(2);
     DIO_voidSetPinValue (LCD_CONTROL_PORT,E_PIN,LOW);
 }
 /*****************************************************************************************/
@@ -142,17 +141,19 @@ void LCD_voidWriteString (u8 *Copy_u8Arr )
 /*****************************************************************************************/
 void LCD_voidWrite_u32Number ( u32 Copy_u32Number)
 {
-    u8 Arr[20] ;
-    u8 i=0 ;
-    while ( Copy_u32Number > 0 )
-    {
-        Arr[i] = Copy_u32Number % 10 ;
-        Copy_u32Number /= 10 ;
-        i++;
+    u8 Arr[20] ; // {1,2,5}
+    u8 i=0 ;    
+    while ( Copy_u32Number > 0 )        // assume number = 521
+    {                                   // iteration_0      // iteration_1  // iteration_2
+        Arr[i] = Copy_u32Number % 10 ;  // 521%10 = 1       // 52%10 = 2    // 5%10 = 5
+        Copy_u32Number /= 10 ;          // 521/10 = 52      // 52/10 = 5    // 5/10 = 0
+        i++;                            // i = 1            // i = 2        // i = 3
     }
+    //i=3 ;
     i--;
+    //i=2 ;
     for( s16 j=i ; j>=0 ; j--)
-    {
+    {   // {1,2,5} - {'1','2','5'}
         LCD_voidWriteChar ( Arr[j] + '0' );
     }
 }

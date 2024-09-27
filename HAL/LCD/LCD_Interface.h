@@ -12,8 +12,8 @@
 #ifndef LCD_INTERFACE_H
 #define LCD_INTERFACE_H
 
-#define LINE_1       0
-#define LINE_2       1
+#define    LINE_1               0
+#define    LINE_2               1
 
 #define    PATTERN_0        0b01000000    // address of First Byte at Sequence 0 at CGRAM            
 #define    PATTERN_1        0b01001000    // address of First Byte at Sequence 1 at CGRAM            

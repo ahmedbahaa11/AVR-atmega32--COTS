@@ -104,11 +104,11 @@ u8   KPAD_u8GetPressedKey (void)
                     Local_u8PinValue = DIO_u8GetPinValue ( KPAD_PORT , KPAD_Au8RowsArr[Local_u8RowsIter] );
                     Local_u8Flag = 1 ;
                 }
-                Local_u8PressedKey = KPAD_Au8KeysArr[Local_u8RowsIter][Local_u8ColumnsIter] ;
+                // Local_u8PressedKey = KPAD_Au8KeysArr[Local_u8RowsIter][Local_u8ColumnsIter] ;
                 break;
             }
         }
-        /* Active the current Column */
+        /* DeActive the current Column */
         DIO_voidSetPinValue ( KPAD_PORT , KPAD_Au8ColumnsArr[Local_u8ColumnsIter] , HIGH );
         if ( Local_u8Flag == 1 )
         {

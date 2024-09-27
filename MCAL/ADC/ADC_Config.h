@@ -20,7 +20,7 @@
 #define     RESERVED                     2
 #define     INTERNAL                     3
 /*===============================================*/
-#define     REFERENCE_VOLTAGE             AVCC
+#define     REFERENCE_VOLTAGE             AREF
 /*===============================================*/
 /*     Select RIGHT or LEFT Adjust      */
 /*--------------------------------------*/
@@ -54,7 +54,7 @@
 #define  Timer_Counter1_Overflow         6
 #define  Timer_Counter1_Capture_Event    7
 /*===============================================*/
-#define  AUTO_TRIGGER_SOURCE     Free_Running_Mode
+#define  AUTO_TRIGGER_SOURCE     External_Interrupt_Request_0
 /*===============================================*/
 /*    ADC Interrupt Enable or Disable   */
 /*--------------------------------------*/
@@ -74,7 +74,7 @@
 #define     PRESCALER_DIVISION_BY_64      64
 #define     PRESCALER_DIVISION_BY_128     128
 /*===============================================*/
-#define     PRESCALER           PRESCALER_DIVISION_BY_128
+#define     PRESCALER           PRESCALER_DIVISION_BY_2
 /*===============================================*/
 
 

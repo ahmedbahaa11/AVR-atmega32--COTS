@@ -13,7 +13,6 @@
 #define LCD_PRIVATE_H
 
 /* Private Macros */
-
 #define   FS_8BIT_2LINES_5x10               0b00111100   // Function Set { 8 BIT, 2 LINES, 5x10 }
 #define   FS_4BIT_2LINES_5x10               0b00101100   // Function Set { 4 BIT, 2 LINES, 5x10 } 
 #define   FS_8BIT_2LINES_5x7                0b00111000   // Function Set { 8 BIT, 2 LINES, 5x7 } 

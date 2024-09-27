@@ -75,10 +75,10 @@ static void RTOS_voidScheduler (void)
     {   
         /* Check The Task is Suspended or Not */
         if( RTOS_ArrTasks[Local_u8TaskCounter].State == TASK_RESUMED )
-        {
+        {           
             if ( RTOS_ArrTasks[Local_u8TaskCounter].FirstDelay == 0 )
             {
-                // Call Task
+                // Call Task                                            // t1 -> 0   t2 -> 2
                 RTOS_ArrTasks[Local_u8TaskCounter].PF () ;
                 // Update Fisrt Delay Value by Periodicity
                 RTOS_ArrTasks[Local_u8TaskCounter].FirstDelay = RTOS_ArrTasks[Local_u8TaskCounter].Periodicity - 1 ;

@@ -20,7 +20,7 @@
 #define     OCR0_REG         *((volatile u8*)0x5C)     // Output Compare Register 
 #define     TIMSK_REG        *((volatile u8*)0x59)     // Timer/Counter Interrupt Mask Register
 #define     TIFR_REG         *((volatile u8*)0x58)     // Timer/Counter Interrupt Flag Register
-#define     SFIOR_REG        *((volatile u8*)0x50)     // Special Function IO Register
+// #define     SFIOR_REG        *((volatile u8*)0x50)     // Special Function IO Register
 /*================================================================================================================*/
 /********   TIMER0 [TCCR0] BITS   *******/
 #define     TIMER0_TCCR0_CS00          0              // TIMER0 Prescaller Clock Select BIT 0           

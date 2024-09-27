@@ -284,7 +284,7 @@ void __vector_11 (void)
 		{
     		Global_PointerToFunction_OVF_T0();                 // Action of OVF Application Function
 		}
-        counter = 0 ;                                       // For Next Period.
+        counter = 0 ; 
         TCNT0_REG = Global_u8PreloadValue ;                 // For Next Period Preload Value.
     }
 }

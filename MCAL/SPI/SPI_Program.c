@@ -115,7 +115,6 @@ void SPI_voidMasterInit (void)
 /*              Enable SPI              */
 /*--------------------------------------*/        
     SET_BIT(SPCR_REG,SPCR_SPE);                     // Enable SPI
-
 }
 
 /************************************************************************************************/
@@ -165,7 +164,6 @@ void SPI_voidSlaveInit (void)
 /*              Enable SPI              */
 /*--------------------------------------*/        
     SET_BIT(SPCR_REG,SPCR_SPE);                     // Enable SPI
-     
 }
 
 /************************************************************************************************/
@@ -281,6 +279,7 @@ void __vector_12 (void)
     u8 Local_u8Data ;
     // Recieve Data
     Local_u8Data = SPDR_REG ;
+
     u8 *Local_Pu8Data = &Local_u8Data ;
     Global_PF_Vector_12 ( Local_Pu8Data );      // Call Back Application Function
     CLEAR_BIT(SPCR_REG,SPCR_SPIE);              // Disable SPI Interrupt

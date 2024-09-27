@@ -11,7 +11,6 @@
 /* Include Header Files From LIB */
 #include "../../LIB/STD_TYPES.h"
 #include "../../LIB/BIT_MATH.h"
-
 /* Include My own Header Files*/
 #include "USART_Interface.h"
 #include "USART_Private.h"
@@ -52,9 +51,11 @@ void USART_voidInit (void)
         UBRR = ( CPU_CLK / ( BAUD_RATE * 8UL ) ) - 1 ;
     #elif( SPEED == DOUBBLE_SPEED )                      // U2X = 0  Double Speed Transsmition
         UBRR = ( CPU_CLK / ( BAUD_RATE * 16UL ) ) - 1 ;
-    #endif
-    UBRRL_REG = (u8)(UBRR);                     // first 8 Bit
-    UBRRH_REG = (u8)(UBRR >> 8);                // second 8 Bit
+    #endif                                                      // UBRR = 0b1111000000110011
+    UBRRL_REG = (u8)(UBRR);                     // first 8 Bit  // (u8)UBRR = 0b00110011
+    UBRRH_REG = (u8)(UBRR >> 8);                // second 8 Bit // (UBRR >> 8 ) = 0b0000000011110000
+                                                                // (u8)(UBRR >> 8 ) = 0b11110000
+
 /*======================================*/
 /*        USART Initilization           */
 /*--------------------------------------*/
@@ -155,7 +156,7 @@ void USART_voidAsyncRecieveData (u8 *Copy_Pu8Data)
 }
 
 /*===========================================================================*/
-/* =====================         TSR Functions          =====================*/
+/*======================         TSR Functions          =====================*/
 /*===========================================================================*/
 
 /*****************************************************************************/

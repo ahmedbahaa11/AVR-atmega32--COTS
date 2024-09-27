@@ -8,7 +8,7 @@
 /*  mail        : ahmedbahaataha7@gmil.com                                         */
 /*=================================================================================*/
 
-#include <util/delay.h>
+// #include <util/delay.h>
 /* Include Header Files From LIB */
 #include "../../LIB/STD_TYPES.h"
 #include "../../LIB/BIT_MATH.h"
@@ -26,12 +26,12 @@
 
 void EEPROM_voidSendDataByte ( u16 Copy_u16LocationAddress , u8 Copy_u8DataByte )
 {
-    u8 Local_Address ;
-    Local_Address = EEPROM_FIXED_ADDRESS | (EEPROM_A2<<2) | ((u8)(Copy_u16LocationAddress>>8)) ;
-    // Send Start Condition
-    I2C_Master_u8StartCondition ();
-    // Send the address packet
-    I2C_Master_u8SendSLA_Write_ACK (Local_Address);
+    u8 Local_Address ;                                                              
+    Local_Address = EEPROM_FIXED_ADDRESS | (EEPROM_A2<<2) | ((u8)(Copy_u16LocationAddress>>8)) ;   
+    // Send Start Condition                                                                        
+    I2C_Master_u8StartCondition ();                                                      
+    // Send the address packet                                                          
+    I2C_Master_u8SendSLA_Write_ACK (Local_Address); // 0b1010xxx0 
     // send the rest 8 BITS of the location Adress
     I2C_Master_u8WriteDataByte_ACK ( (u8)(Copy_u16LocationAddress));
     // Send The Data Byte to the Memory Location

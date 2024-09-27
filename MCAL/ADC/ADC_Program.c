@@ -25,7 +25,6 @@ void (*Global_PF_Vector_16)(void) = NULL ;
 u16 ADC_u16Result = 0 ;
 u8 ADC_u18BusyFlag = 0 ;
 
-
 /************************************************************************************************/
 /* Function Name : ADC_voidInit                                                                 */
 /* Description : Initilization of ADC with Specific Specs accordig to Gonfigration File.h       */
@@ -157,6 +156,7 @@ void ADC_voidInit (void)
     #endif
 /*======================================*/
 }
+
 /************************************************************************************************/
 /* Function Name : ADC_u16ReadSynchronus                                                        */
 /* Description : Get Analog Reading From ADC                                                    */
@@ -301,5 +301,4 @@ void __vector_16 (void)
 
 /*     Disable ADIE  AD Interrupt Enable     */   
     CLEAR_BIT(ADCSRA_REG,3);   
-    
 }

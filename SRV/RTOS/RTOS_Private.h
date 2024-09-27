@@ -17,12 +17,13 @@
 typedef struct {
     u16 FirstDelay ;
     u16 Periodicity ;
-    u8 State ;
+    u8 State  ;
     void (*PF)(void) ;
 }RTOS_TCB;                  // TCB Task Control Block
  
 #define     TASK_RESUMED            0
 #define     TASK_SUSPENDED          1
+
 
 
 /*********************************************************************************************/
