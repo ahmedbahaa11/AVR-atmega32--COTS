@@ -1,28 +1,40 @@
 /*=================================================================================*/
-/*  File        : TIMER0_Config.h                                                  */
-/*  Description : This file includes TIMER0 Driver Configrations for Atmega32      */
+/*  File        : TIMER1_Config.h                                                  */
+/*  Description : This file includes TIMER1 Driver Configrations for Atmega32      */
 /*  Author      : Ahmed Bahaa Taha Nasr. Embedded SW Engineer                      */
-/*  Date        : 7/4/2023                                                         */
+/*  Date        : 9/4/2023                                                         */
 /*  Linkedin    : https://www.linkedin.com/in/ahmed-bahaa1/                        */
 /*  Git account : https://github.com/ahmedbahaa11                                  */
 /*  mail        : ahmedbahaataha7@gmil.com                                         */
 /*=================================================================================*/
 /* File Gaurd by ifndef & endif */
-#ifndef TIMER0_CONFIG_H
-#define TIMER0_CONFIG_H
+#ifndef TIMER1_CONFIG_H
+#define TIMER1_CONFIG_H
 
 /*===============================================*/
-/*              TIMER0 Mode Selection            */
+/*              TIMER1 Mode Selection            */
 /*-----------------------------------------------*/
-#define     NORMAL_OVF                   0
-#define     PWM_PHASECORRECT             1
-#define     CTC                          2
-#define     FAST_PWM                     3
-/*===============================================*/
-#define     MODE                     NORMAL_OVF
-/*===============================================*/
+#define     NORMAL_OVF                          0       
+#define     PWM_PHASECORRECT_8_BIT              1
+#define     PWM_PHASECORRECT_9_BIT              2
+#define     PWM_PHASECORRECT_10_BIT             3
+#define     CTC                                 4
+#define     FAST_PWM_8_BIT                      5
+#define     FAST_PWM_9_BIT                      6
+#define     FAST_PWM_10_BIT                     7
+#define     PWM_Phase_FrequencyCorrect_ICR1     8
+#define     PWM_Phase_FrequencyCorrect          9
+#define     PWM_PhaseCorrect_ICR1               10
+#define     PWM_PhaseCorrect                    11
+#define     CTC_ICR1                            12
+#define     Reversed                            13
+#define     FAST_PWM_ICR1                       14
+#define     FAST_PWM                            15
 /*==========================================================*/
-/*               OC0 Mode Selection                         */
+#define     MODE                     FAST_PWM_ICR1
+/*==========================================================*/
+/*==========================================================*/
+/*               OC1A & OC1B Mode Selection                 */
 /*----------------------------------------------------------*/
 #define     DISCONNECTED                                    0
 #define     SETonTOP_CLEARonCOMPARE                         1
@@ -30,10 +42,11 @@
 #define     SETonCOMPdownCounting_CLEARonCOMPupCounting     3    
 #define     SETonCOMPupCounting_CLEARonCOMPdownCounting     4
 /*===========================================================*/
-#define     OC0_MODE      SETonTOP_CLEARonCOMPARE
+#define     OC1A_MODE      SETonTOP_CLEARonCOMPARE                  // Channel A at PIN OC1A
+#define     OC1B_MODE      DISCONNECTED                             // Channel B at PIN OC1B
 /*===========================================================*/
 /*===============================================*/
-/*          TIMER0 Prescaller Selection          */
+/*          TIMER1 Prescaller Selection          */
 /*-----------------------------------------------*/
 #define     NO_CLK_SOURCE_TIMER_STOPED          0
 #define     NOT_USE_PRESCALER                   1
@@ -46,6 +59,8 @@
 /*===========================================================*/
 #define     PRESCALER           PRESCALER_DIVISION_BY_8
 /*===========================================================*/
+
+
 
 
 #endif
