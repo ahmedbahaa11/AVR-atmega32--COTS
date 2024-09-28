@@ -40,7 +40,7 @@ void TIMER0_voidInit (void);
 /* Fun. Argument1: (*Local_PointerToFunction_OVF) { Address of OVF Application Function }       */
 /* Fun. Return : void                                                                           */
 /************************************************************************************************/
-void TIMER0_voidSetCallBack_OVF (void (*Local_PointerToFunction_OVF) (void));
+void TIMER0_voidSetCallBack_OVF (void (*Local_PointerToFunction_OVF) (void), f32 const requiredTime_ms);
 
 /************************************************************************************************/
 /* Function Name : TIMER0_voidSetCallBack_CTC                                                   */

@@ -22,6 +22,7 @@ void (*Global_PointerToFunction_CTC_T0) (void) = NULL ;
 u16 Global_u8PreloadValue = 0 ;
 u16 Global_u8CompareMatchValue = 0 ;
 u32 Global_u32Time_ms = 0 ;
+u32 Global_counterOVF = 0 ;
 
 /*============================================================================================================*/
 /*==============================     A.BAHAA TIMER0 Functions Implementation      ============================*/
@@ -149,8 +150,17 @@ void TIMER0_voidInit (void)
 /* Fun. Argument1: (*Local_PointerToFunction_OVF) { Address of OVF Application Function }       */
 /* Fun. Return : void                                                                           */
 /************************************************************************************************/
-void TIMER0_voidSetCallBack_OVF (void (*Local_PointerToFunction_OVF) (void))
+void TIMER0_voidSetCallBack_OVF (void (*Local_PointerToFunction_OVF) (void), f32 const requiredTime_ms)
 {
+    u32 TimerCLK = 8UL / PRESCALER;
+    u32 OVF_Tome = 256UL * TimerCLK; // MircoSeconed
+    f32 counterOVF = (requiredTime_ms * 1000UL) / (f32)256;
+    Global_counterOVF = (u32)counterOVF;
+    u8 preLoadValue = 256U - (256U * ((f32)(counterOVF - ((f32)Global_counterOVF))));
+    if((preLoadValue > 0U) && (preLoadValue < 256U)) {
+        TIMER0_voidSetPreloadValue(preLoadValue);
+        Global_counterOVF++;
+    }
     Global_PointerToFunction_OVF_T0 = Local_PointerToFunction_OVF ;
 }
 
@@ -276,9 +286,9 @@ void TIMER0_voidBahaaPWM ( u8 Local_u8CompareMatchValue )
 void __vector_11 (void)   __attribute__((signal));
 void __vector_11 (void)
 {
-    static u16 counter = 0 ;
+    static u32 counter = 0 ;
     counter ++ ;
-    if ( counter == 3907 )
+    if ( counter == Global_counterOVF )
     {
         if(Global_PointerToFunction_OVF_T0 != NULL)
 		{
