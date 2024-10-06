@@ -4,10 +4,10 @@ make sync
 make all
 
 (
-    echo                        Building Process [SUCCESS]
-    echo                      ------------------------------
-    echo                            Eng _ Mostafa Samir
-    echo                Embedded System Software Engineer
+    echo                     Building Process [SUCCESS]
+    echo                     ----------------------------
+    echo             Developed By Eng. Ahmed Bahaa Nasr
+    echo          Automotive Embedded SW Engineer [ADAS]
 ) > temp.txt
 
 msg * < temp.txt
