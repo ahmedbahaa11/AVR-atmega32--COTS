@@ -27,8 +27,8 @@ all: $(OUT_DIR)/$(TARGET).hex
 	@echo "---------- HEX File was Generated [Successful] -----------"
 	@echo "----------------------------------------------------------"
 	@echo "----------------------------------------------------------"
-	@echo "------------ Developed by Eng - Ahmed Bahaa  -------------"
-	@echo "--------- Automotive Embedded SW Engineer [ADAS] ---------"
+	@echo "-------------------  Eng _ Mostafa Samir  ----------------"
+	@echo "-----------  Embedded System Software Engineer -----------"
 	@echo "----------------------------------------------------------"
 	@echo "----------------------------------------------------------"
 	@echo
