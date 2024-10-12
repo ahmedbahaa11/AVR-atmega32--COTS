@@ -1,0 +1,24 @@
+# Ignore object files
+*.o
+*.obj
+
+# Ignore compiled executable binaries
+*.out
+*.exe
+*.bin
+
+# Ignore build directories
+/build/
+/bin/
+/debug/
+/release/
+/output/
+
+# Ignore IDE specific files (for example, if using VS Code or Eclipse)
+.vscode/
+.idea/
+
+# Ignore temporary or backup files
+*~  # Temporary files
+*.swp # Vim swap files
+

@@ -56,7 +56,7 @@ void USART_voidRecieveData (u8 *Copy_Pu8Data);
 /* Fun. Argument2: *Copy_Pu8CallBackFunIndication_TXC {address of Call Back Application Function} */
 /* Fun. Return : void                                                                             */
 /**************************************************************************************************/
-void USART_voidAsyncSendData ( u8 Copy_u8Data , u8 *Copy_Pu8CallBackFunIndication_TXC );
+void USART_voidAsyncSendData ( u8 Copy_u8Data , void (*Copy_Pu8CallBackFunIndication_TXC)(void));
 
 /**************************************************************************************************/
 /* Function Name : USART_voidAsyncRecieveData                                                     */
