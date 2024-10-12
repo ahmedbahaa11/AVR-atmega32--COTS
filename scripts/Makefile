@@ -3,10 +3,11 @@ CC      = avr-gcc
 CFLAGS  = -Os -DF_CPU=8000000UL -mmcu=$(MCU)
 TARGET  = program
 SRC_DIR = ../program
-OUT_DIR = ../output
+OUT_DIR = ../build
+BIN_DIR = ../build/bin
 
-# Ensure the output directories exist
-$(shell mkdir -p $(OUT_DIR))
+# Ensure the build directories exist
+$(shell mkdir -p $(BIN_DIR))
 
 
 # Recursive wildcard function to find all .c files in the program directory and subdirectories
@@ -21,6 +22,8 @@ OBJ  := $(SRC:.c=.o)
 
 # Rule to Build all Program Files
 all: $(OUT_DIR)/$(TARGET).hex
+	@mv $(OUT_DIR)/*.elf $(BIN_DIR)
+	@mv $(OUT_DIR)/*.hex $(BIN_DIR)
 	@echo
 	@echo
 	@echo "----------------------------------------------------------"
