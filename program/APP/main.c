@@ -27,37 +27,38 @@ int main(void)
 	LCD_voidGoTo_XY (0,0);
 	LCD_voidWriteString (" Eng :");
 	LCD_voidGoTo_XY (1,0);
-	LCD_voidWriteString ("Mostafa Samirs");
-	 _delay_ms(500);
+	LCD_voidWriteString ("Mostafa Samir");
+	 _delay_ms(1000);
     while (1) 
     {
 		
 		u8 button = DIO_u8GetPinValue(PORTB,PIN0);
-		if (button == 0)
+		if (button == 1)
 		{
 			
-				 LED_voidStatus_Led_Pin(PORTA,PIN0,ON);
-				 _delay_ms(500);
-				 LED_voidStatus_Led_Pin(PORTA,PIN0,OFF);
-				 _delay_ms(500);
-				
-				LCD_voidClearDisplay ();
-				LCD_voidWriteString (" RED IS ON");
-				
+			//
+			LCD_voidClearDisplay ();
+			LCD_voidGoTo_XY (0,0);
+			LCD_voidWriteString (" RED ON");
+			
+			LED_voidStatus_Led_Pin(PORTA,PIN0,ON);
+			_delay_ms(500);
+			LED_voidStatus_Led_Pin(PORTA,PIN0,OFF);	
+					
 		}
 		else
 		{
 			
+			//
+			LCD_voidClearDisplay ();
+			LCD_voidGoTo_XY (0,0);
+			LCD_voidWriteString (" YELLOW ON");
+			
 			LED_voidStatus_Led_Pin(PORTA,PIN1,ON);
 			_delay_ms(500);
 			LED_voidStatus_Led_Pin(PORTA,PIN1,OFF);
-			_delay_ms(500);
 			
-			LCD_voidClearDisplay ();
-			LCD_voidWriteString (" YELLOW IS ON");
-		}
-		
-		
+		}		
 		
     }
 }
