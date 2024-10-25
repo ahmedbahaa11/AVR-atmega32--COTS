@@ -20,7 +20,7 @@
 /***************************  [3]  TIMER0_voidSetCallBack_CTC                          ************************/
 /***************************  [4]  TIMER0_voidSetPreloadValue                          ************************/
 /***************************  [5]  TIMER0_voidSetCompareMatchValue                     ************************/
-/***************************  [6]  TIMER0_voidSetBusyWait_ms                           ************************/
+/***************************  [6]  TIMER0_delay_ms                           ************************/
 /***************************  [7]  TIMER0_voidBahaaPWM                                 ************************/
 /***************************  [8]  TIMER0_voidSetCallBack_CTC_andRequiredTime_ms       ************************/
 /***************************  [9]  void __vector_11 (void)   __attribute__((signal));  ************************/
@@ -67,12 +67,12 @@ void TIMER0_voidSetPreloadValue ( u8 Copy_u8PreloadValue );
 void TIMER0_voidSetCompareMatchValue ( u8 Copy_u8CompareMatchValue );
 
 /**************************************************************************************************/
-/* Function Name : TIMER0_voidSetBusyWait_ms                                                      */
+/* Function Name : TIMER0_delay_ms                                                      */
 /* Description : Set Busy Wait Function work as Delay by make Processor Stuck in Fun. during Time */                                          
 /* Fun. Argument1: Copy_u32Time_ms  { any Time in Milliseconds }                                  */
 /* Fun. Return : void                                                                             */
 /**************************************************************************************************/
-void TIMER0_voidSetBusyWait_ms ( u32 Copy_u32Time_ms );
+void TIMER0_delay_ms ( u32 Copy_u32Time_ms );
 
 /************************************************************************************************/
 /* Function Name : TIMER0_voidBahaaPWM                                                          */
@@ -89,7 +89,8 @@ void TIMER0_voidBahaaPWM ( u8 Local_u8CompareMatchValue );
 /* Fun. Argument2: Local_u32Time_ms { Required Time }                                           */
 /* Fun. Return : void                                                                           */
 /************************************************************************************************/
-void TIMER0_voidSetCallBack_CTC_andRequiredTime_ms (void (*Local_PointerToFunction_CTC) (void),u32 Copy_u32Time_ms);
+void TIMER0_voidSetCallBack_CTC_andRequiredTime_ms (void (*Local_PointerToFunction_CTC) (void),u32 Copy_u32Time_ms, u8 Local_u8CompareMatchValue);
 
+void TIMER0_isrCounterCalculations(u32 Copy_u32Time_ms, u8 TimerMode, u8 CompareMatchValue);
 
 #endif

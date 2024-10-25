@@ -13,4 +13,4 @@ make all
 @REM msg * < temp.txt
 @REM del temp.txt
 
-@REM pause
+pause
