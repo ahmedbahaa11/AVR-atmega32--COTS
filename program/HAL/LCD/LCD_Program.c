@@ -55,23 +55,23 @@ void LCD_voidInit (void)
     DIO_voidSetPinDirection(LCD_CONTROL_PORT,RW_PIN,OUTPUT);
     DIO_voidSetPinDirection(LCD_CONTROL_PORT,E_PIN,OUTPUT);
 
-    _delay_ms(35);    //TIMER0_voidSetBusyWait_ms(35);
+    _delay_ms(35);    //TIMER0_delay_ms(35);
 
     /* Send Command Function Set */
     LCD_voidWriteCommand ( FS_8BIT_2LINES_5x10 );
-    _delay_ms(1);     // TIMER0_voidSetBusyWait_ms(1);
+    _delay_ms(1);     // TIMER0_delay_ms(1);
 
     /* Send Command Display ON-OFF Control */
     LCD_voidWriteCommand ( DIS_ON_NO_CURSER );
-    _delay_ms(1);     //TIMER0_voidSetBusyWait_ms(1);
+    _delay_ms(1);     //TIMER0_delay_ms(1);
 
     /* Send Command Display Clear */
     LCD_voidWriteCommand ( DIS_CLEAR );
-    _delay_ms(2);     //TIMER0_voidSetBusyWait_ms(2);
+    _delay_ms(2);     //TIMER0_delay_ms(2);
 
     /* Send Command Entry Mode */
     LCD_voidWriteCommand ( ENTRY_MODE_INCREASE_NO_SHIFT );
-    _delay_ms(1);     //TIMER0_voidSetBusyWait_ms(1);
+    _delay_ms(1);     //TIMER0_delay_ms(1);
 
 }
 /*****************************************************************************************/

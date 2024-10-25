@@ -19,7 +19,7 @@
 #define     CTC                          2
 #define     FAST_PWM                     3
 /*===============================================*/
-#define     MODE                     NORMAL_OVF
+#define     MODE                     CTC
 /*===============================================*/
 /*==========================================================*/
 /*               OC0 Mode Selection                         */
@@ -35,17 +35,17 @@
 /*===============================================*/
 /*          TIMER0 Prescaller Selection          */
 /*-----------------------------------------------*/
-#define     NO_CLK_SOURCE_TIMER_STOPED          0
-#define     NOT_USE_PRESCALER                   1
-#define     PRESCALER_DIVISION_BY_8             8
-#define     PRESCALER_DIVISION_BY_64            64
-#define     PRESCALER_DIVISION_BY_256           256
-#define     PRESCALER_DIVISION_BY_1024          1024
-#define     EXTERNAL_CLK_SOURCE_FALLING_EDGE    6
-#define     EXTERNAL_CLK_SOURCE_RAISING_EDGE    7
+#define     NO_CLK_SOURCE_TIMER_STOPED       0x00
+#define     NOT_USE_PRESCALER                0x01
+#define     PRESCALER_DIVISION_BY_8          0x02
+#define     PRESCALER_DIVISION_BY_64         0x03
+#define     PRESCALER_DIVISION_BY_256        0x04
+#define     PRESCALER_DIVISION_BY_1024       0x05
+#define     EXTERNAL_CLK_SOURCE_FALLING_EDGE 0x06  
+#define     EXTERNAL_CLK_SOURCE_RAISING_EDGE 0x07   
 /*===========================================================*/
-#define     PRESCALER           PRESCALER_DIVISION_BY_8
+#define     PRESCALER           PRESCALER_DIVISION_BY_1024
 /*===========================================================*/
-
+#define     CPU_CLK       8  // MHz
 
 #endif

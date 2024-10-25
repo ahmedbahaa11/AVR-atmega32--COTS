@@ -30,7 +30,7 @@ RTOS_TCB RTOS_ArrTasks[RTOS_u8_MAX_NUMBER_TASKS] ;
 void RTOS_voidInit (void)
 {
     // Set Call Back Function & Compare Required Time
-    TIMER0_voidSetCallBack_CTC_andRequiredTime_ms( &RTOS_voidScheduler , 1 ); // 1 msec
+    TIMER0_voidSetCallBack_CTC_andRequiredTime_ms( &RTOS_voidScheduler , 1 , 200); // 1 msec
     // Start Timer ( CTC Mode + Enable CTC Interrupt + Put Prescaller 8 )
     TIMER0_voidInit();
 }
