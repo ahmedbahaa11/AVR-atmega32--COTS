@@ -19,7 +19,7 @@
 #define     CTC                          2
 #define     FAST_PWM                     3
 /*===============================================*/
-#define     MODE                     CTC
+#define     MODE                     FAST_PWM
 /*===============================================*/
 /*==========================================================*/
 /*               OC0 Mode Selection                         */
@@ -44,7 +44,7 @@
 #define     EXTERNAL_CLK_SOURCE_FALLING_EDGE 0x06  
 #define     EXTERNAL_CLK_SOURCE_RAISING_EDGE 0x07   
 /*===========================================================*/
-#define     PRESCALER           PRESCALER_DIVISION_BY_1024
+#define     PRESCALER           PRESCALER_DIVISION_BY_8
 /*===========================================================*/
 #define     CPU_CLK       8  // MHz
 

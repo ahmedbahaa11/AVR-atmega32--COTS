@@ -242,6 +242,15 @@ void TIMER0_voidBahaaPWM ( u8 Local_u8CompareMatchValue )
 {
     TIMER0_voidSetCompareMatchValue ( Local_u8CompareMatchValue );
 }
+
+void TIMER0_voidsetDutyCycle_PWM ( u8 Local_u8DutyCycle )
+{
+    if((Local_u8DutyCycle >= 0U) && (Local_u8DutyCycle <= 100U))
+    {
+        u32 compateMatchValue = (Local_u8DutyCycle * 256U) / 100U;
+        TIMER0_voidSetCompareMatchValue(compateMatchValue);
+    }
+}
 /*  // For Loop to Increase PWM and Decrease PWM used in APPLICATION.
     for ( u16 Counter=0 ; Counter <= 255 ; Counter++ )
     {

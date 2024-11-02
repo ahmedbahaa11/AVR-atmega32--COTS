@@ -93,4 +93,6 @@ void TIMER0_voidSetCallBack_CTC_andRequiredTime_ms (void (*Local_PointerToFuncti
 
 void TIMER0_isrCounterCalculations(u32 Copy_u32Time_ms, u8 TimerMode, u8 CompareMatchValue);
 
+void TIMER0_voidsetDutyCycle_PWM ( u8 Local_u8DutyCycle );
+
 #endif
