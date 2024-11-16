@@ -5,36 +5,26 @@
 #include "../MCAL/DIO/DIO_Interface.h"
 #include "../HAL/LED/LED_Interface.h"
 #include "../MCAL/TIMERS/TIMER0/TIMER0_Interface.h"
+#include "../MCAL/TIMERS/TIMER1/TIMER1_Interface.h"
 #include "../MCAL/GIE/GIE_Interface.h"
 #include "../MCAL/WDT/WDT_Interface.h"
+#include "../HAL/SERVO_MOTOR/SERVO_Interface.h"
 
 void action1(void);
 int main(void)
 {
-	TIMER0_voidInit();
+	// TIMER0_voidInit();
+	TIMER1_voidInit();
 	// GIE_void_GI_Enable(ON);
-	LED_voidInit_Led_Pin(PORTB,PIN3);
 
-	// LED_voidInit_Led_Pin(PORTC,PIN0);
-	// LED_voidStatus_Led_Pin(PORTC,PIN0,ON);
-	// LED_voidInit_Led_Pin(PORTC,PIN1);
-	// LED_voidStatus_Led_Pin(PORTC,PIN1,ON);
-	// bool flag = true;
-	TIMER0_voidsetDutyCycle_PWM(90);
+	SERVO_voidRotateSpecificAngle_OC1A(90);
 	while(1)
 	{
-		// LED_voidToggle_Led_Pin(PORTC,PIN0);
-		// TIMER0_delay_ms(200);
-		// LED_voidToggle_Led_Pin(PORTC,PIN0);
-		// TIMER0_delay_ms(200);
-		// LED_voidToggle_Led_Pin(PORTC,PIN0);
-		// TIMER0_delay_ms(200);
-		// LED_voidToggle_Led_Pin(PORTC,PIN0);
-		// TIMER0_delay_ms(200);
-		// while(flag)
-		// {
-
-		// }
+		for(u8 i = 0; i < 180 ; i++)
+		{
+			SERVO_voidRotateSpecificAngle_OC1A(i);
+			_delay_ms(50);
+		}
 	}
 	return 0 ;
 }
