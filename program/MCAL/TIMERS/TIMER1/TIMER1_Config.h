@@ -42,7 +42,7 @@
 #define     SETonCOMPdownCounting_CLEARonCOMPupCounting     3    
 #define     SETonCOMPupCounting_CLEARonCOMPdownCounting     4
 /*===========================================================*/
-#define     OC1A_MODE      SETonTOP_CLEARonCOMPARE                  // Channel A at PIN OC1A
+#define     OC1A_MODE      DISCONNECTED                  // Channel A at PIN OC1A
 #define     OC1B_MODE      DISCONNECTED                             // Channel B at PIN OC1B
 /*===========================================================*/
 /*===============================================*/

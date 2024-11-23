@@ -22,8 +22,9 @@
 #include"../TIMERS/TIMER1/TIMER1_Interface.h"
 #include"../TIMERS/TIMER1/TIMER1_Private.h"
 #include"../TIMERS/TIMER1/TIMER1_Config.h"
-/* Global Pointer to Function */
-void (*GlobalPF_vector_6) ( void ) = NULL ;
+
+u32* global_periodTime = NULL;
+u32* global_onTime     = NULL;
 
 /*============================================================================================================*/
 /*=============================       A.BAHAA ICU Functions Implementation        ============================*/
@@ -36,58 +37,6 @@ void (*GlobalPF_vector_6) ( void ) = NULL ;
 /***********************   [6]  void __vector_6 (void)   __attribute__((signal));  ****************************/
 /*============================================================================================================*/
 
-
-/*======================================================================================*/
-/*====================== ICU in main.c ( to Set Call Back Function ) ===================*/
-/*======================================================================================*/
-/*
-// Global Variables
-u16 Global_u16PeriodTime = 0 ;
-u16 Global_ONTime = 0 ;
-void ICU_HW ( void);
-
-int main ()
-{
-    DIO_voidSetPinDirection(PORTD,PIN6,INPUT);		// ICP1
-	ICU_voidInit ();
-	ICU_SetCallBackFun (&ICU_HW);
-    LCD_voidInit();
-    GIE_void_GI_Enable(ON);
-    while(1)
-	{
-		while( Global_ONTime != 0 || Global_u16PeriodTime != 0  );
-		// Action  
-	}
-    return 0 ;
-}
-
-void ICU_HW ( void )
-{
-
-	  volatile static u16 Global_ICU_Read1 ;
-	  volatile static u16 Global_ICU_Read2 ;
-	  volatile static u16 Global_ICU_Read3 ;
-	  volatile static u8 Counter = 0 ;
-	    Counter++ ;
-	    if ( Counter == 1 )
-	    {
-	        Global_ICU_Read1 = ICU_u8GetReadICR1 ();      // First Raising Edege
-	    }
-	    else if ( Counter == 2 )
-	    {
-	        Global_ICU_Read2 = ICU_u8GetReadICR1 ();                     // Second Raising Edege
-	        Global_u16PeriodTime = Global_ICU_Read2 - Global_ICU_Read1 ;
-	        ICU_voidEdgeSelect ( FALLING_EDGE );       // Sense Falling Edge to calculate time of ON Time from Second Raising Ege to First Falling Edge.
-	    }
-	    else if ( Counter == 3 )
-	    {
-	        Global_ICU_Read3 = ICU_u8GetReadICR1 ();
-	        Global_ONTime = Global_ICU_Read3 - Global_ICU_Read2 - 1 ;
-	        Counter = 0 ;
-	        ICU_voidDisableInterrupt();
-	    }
-}
-*/
 
 /************************************************************************************************/
 /* Function Name : ICU_voidInit                                                                 */
@@ -153,7 +102,7 @@ void ICU_voidInit (void)
 /*=====================================================*/
 /*     (TICIE) Enable Input Capture Unit Interrupt     */
 /*-----------------------------------------------------*/
-    SET_BIT(TIMSK_REG,TIMER_TIMSK_TICIE);              // Enable PIE of ICU    
+    SET_BIT(TIMSK_REG,TIMER_TIMSK_TICIE);       // Enable PIE of ICU
 }
 
 /************************************************************************************************/
@@ -198,9 +147,41 @@ u16 ICU_u16GetReadICR1 (void)
 /* Fun. Argument1: void (*LocalPF_vector_6) (void) { address of App CallBack Fun ICU_HW }       */
 /* Fun. Return : void                                                                           */
 /************************************************************************************************/
-void ICU_SetCallBackFun ( void (*LocalPF_vector_6) (void) )
+void ICU_SetOutputMembers (u32* periodTime, u32* onTime)
 {
-	GlobalPF_vector_6 = LocalPF_vector_6 ;
+	global_periodTime = periodTime ;
+	global_onTime     = onTime     ;
+}
+
+void ICU_ISR (void)
+{
+    static u16 Global_ICU_Read1 ;
+    static u16 Global_ICU_Read2 ;
+    static u16 Global_ICU_Read3 ;
+    static u8 Counter = 0 ;
+    Counter++ ;
+    if ( Counter == 1 )
+    {
+        // First Raising Edege
+        Global_ICU_Read1 = ICU_u16GetReadICR1 (); 
+    }
+    else if ( Counter == 2 )
+    {
+        // Second Raising Edege
+        Global_ICU_Read2 = ICU_u16GetReadICR1 ();
+
+        *global_periodTime = Global_ICU_Read2 - Global_ICU_Read1 ;
+        
+        // Sense Falling Edge to calculate time of ON Time from Second Raising Ege to First Falling Edge.
+        ICU_voidEdgeSelect ( FALLING_EDGE );      
+    }
+    else if ( Counter == 3 )
+    {
+        Global_ICU_Read3 = ICU_u16GetReadICR1 ();
+        *global_onTime = Global_ICU_Read3 - Global_ICU_Read2 - 1 ;
+        Counter = 0 ;
+        ICU_voidDisableInterrupt();
+    }
 }
 
 /*****************************************************************************/
@@ -212,8 +193,8 @@ void ICU_SetCallBackFun ( void (*LocalPF_vector_6) (void) )
 void __vector_6 (void)    __attribute__((signal));
 void __vector_6 (void)
 {
-	if (GlobalPF_vector_6 != NULL )
-	{
-		GlobalPF_vector_6();
-	}
+    if((global_periodTime != NULL) && (global_onTime != NULL))
+    {
+        ICU_ISR();
+    }
 }

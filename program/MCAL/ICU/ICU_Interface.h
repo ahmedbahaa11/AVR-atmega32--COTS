@@ -52,13 +52,8 @@ void ICU_voidDisableInterrupt(void);
 /************************************************************************************************/
 void ICU_voidEdgeSelect ( u8 Copy_u8EdgeSelect );
 
-/************************************************************************************************/
-/* Function Name : ICU_SetCallBackFun                                                           */
-/* Description  : Call Back Function                                                            */                                          
-/* Fun. Argument1: void (*LocalPF_vector_6) (void) { address of App CallBack Fun ICU_HW }       */
-/* Fun. Return : void                                                                           */
-/************************************************************************************************/
-void ICU_SetCallBackFun ( void (*LocalPF_vector_6) (void));
+void ICU_ISR (void);
+void ICU_SetOutputMembers (u32* periodTime, u32* onTime);
 
 
 /*=====================================================================*/
