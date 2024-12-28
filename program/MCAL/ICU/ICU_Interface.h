@@ -53,7 +53,7 @@ void ICU_voidDisableInterrupt(void);
 void ICU_voidEdgeSelect ( u8 Copy_u8EdgeSelect );
 
 void ICU_ISR (void);
-void ICU_SetOutputMembers (u32* periodTime, u32* onTime);
+void ICU_GetOutputs (u32* periodTime, u32* onTime);
 
 
 /*=====================================================================*/

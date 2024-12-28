@@ -40,7 +40,7 @@ void SERVO_voidRotateSpecificAngle_OC1A ( u16 Copy_u16Angle )
     DIO_voidSetPinDirection(PORTD,PIN5,OUTPUT);
     u32 Local_u32Variable ;
     Local_u32Variable = (((Copy_u16Angle * 1000UL) + 180000) / (180)) - 1 ;
-    TIMER1_voidBahaa_u16PWM_T1A ( Local_u32Variable ,19999);
+    TIMER1_voidBahaa_u16PWM_T1A ( Local_u32Variable ,(20000 - 1));
 }
 
 /************************************************************************************************/

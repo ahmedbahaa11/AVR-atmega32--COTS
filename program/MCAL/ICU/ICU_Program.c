@@ -142,12 +142,12 @@ u16 ICU_u16GetReadICR1 (void)
 }
 
 /************************************************************************************************/
-/* Function Name : ICU_SetCallBackFun                                                           */
+/* Function Name : ICU_GetOutputs                                                           */
 /* Description  : Call Back Function                                                            */                                          
 /* Fun. Argument1: void (*LocalPF_vector_6) (void) { address of App CallBack Fun ICU_HW }       */
 /* Fun. Return : void                                                                           */
 /************************************************************************************************/
-void ICU_SetOutputMembers (u32* periodTime, u32* onTime)
+void ICU_GetOutputs (u32* periodTime, u32* onTime)
 {
 	global_periodTime = periodTime ;
 	global_onTime     = onTime     ;
@@ -155,20 +155,20 @@ void ICU_SetOutputMembers (u32* periodTime, u32* onTime)
 
 void ICU_ISR (void)
 {
-    static u16 Global_ICU_Read1 ;
-    static u16 Global_ICU_Read2 ;
-    static u16 Global_ICU_Read3 ;
-    static u8 Counter = 0 ;
+    static u16 Global_ICU_Read1 = 0U ;
+    static u16 Global_ICU_Read2 = 0U ;
+    static u16 Global_ICU_Read3 = 0U ;
+    static u8 Counter = 0U ;
     Counter++ ;
     if ( Counter == 1 )
     {
         // First Raising Edege
-        Global_ICU_Read1 = ICU_u16GetReadICR1 (); 
+        Global_ICU_Read1 = ICU_u16GetReadICR1(); 
     }
     else if ( Counter == 2 )
     {
         // Second Raising Edege
-        Global_ICU_Read2 = ICU_u16GetReadICR1 ();
+        Global_ICU_Read2 = ICU_u16GetReadICR1();
 
         *global_periodTime = Global_ICU_Read2 - Global_ICU_Read1 ;
         
@@ -180,7 +180,7 @@ void ICU_ISR (void)
         Global_ICU_Read3 = ICU_u16GetReadICR1 ();
         *global_onTime = Global_ICU_Read3 - Global_ICU_Read2 - 1 ;
         Counter = 0 ;
-        ICU_voidDisableInterrupt();
+        ICU_voidEdgeSelect ( RAISING_EDGE );
     }
 }
 
