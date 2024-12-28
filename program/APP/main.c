@@ -4,32 +4,34 @@
 #include "../LIB/BIT_MATH.h"
 #include "../MCAL/DIO/DIO_Interface.h"
 #include "../HAL/LED/LED_Interface.h"
-#include "../MCAL/TIMERS/TIMER0/TIMER0_Interface.h"
-#include "../MCAL/TIMERS/TIMER1/TIMER1_Interface.h"
-#include "../MCAL/GIE/GIE_Interface.h"
 #include "../MCAL/WDT/WDT_Interface.h"
-#include "../HAL/SERVO_MOTOR/SERVO_Interface.h"
 
-void action1(void);
 int main(void)
 {
-	// TIMER0_voidInit();
-	TIMER1_voidInit();
-	// GIE_void_GI_Enable(ON);
-
-	SERVO_voidRotateSpecificAngle_OC1A(90);
+	DIO_voidSetPinDirection(PORTA, PIN0, OUTPUT);
+	DIO_voidSetPinDirection(PORTA, PIN1, OUTPUT);
+	DIO_voidSetPinValue(PORTA, PIN0, LOW);
+	DIO_voidSetPinValue(PORTA, PIN1, HIGH);
+	_delay_ms(2000);
+	DIO_voidSetPinValue(PORTA, PIN1, LOW);
 	while(1)
 	{
-		for(u8 i = 0; i < 180 ; i++)
+		// Code
+
+		WDT_voidEnable();
+			for(u8 i = 0; i < 10 ; i++)
+			{
+				DIO_voidTogglePinValue(PORTA, PIN0);
+				_delay_ms(100);
+			}
+			WDT_voidReset();
+		WDT_voidDisable();
+
+		for(u8 i = 0; i < 40 ; i++)
 		{
-			SERVO_voidRotateSpecificAngle_OC1A(i);
-			_delay_ms(50);
+			DIO_voidTogglePinValue(PORTA, PIN1);
+			_delay_ms(100);
 		}
 	}
 	return 0 ;
-}
-
-void action1(void)
-{
-	LED_voidToggle_Led_Pin(PORTC,PIN1);
 }

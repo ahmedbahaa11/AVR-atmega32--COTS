@@ -60,6 +60,13 @@ void WDT_voidReset(void)
 
 void WDT_voidDisable(void)
 {
+    // Reset the watchdog timer to prevent unintended resets
+    WDT_voidReset();
+
+	// Start timed sequence to disable WDT 
+	// Write logical one to WDTOE and WDE)
 	WDT_WDTCR = (1 << WDTCR_WDPTOE) | (1 << WDTCR_WDE);
-    WDT_WDTCR = CLEAR_BIT(WDT_WDTCR, WDTCR_WDE);
+
+    // Within 4 clock cycles, disable WDT by clearing WDE
+    WDT_WDTCR = 0x00;
 }
