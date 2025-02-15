@@ -1,35 +1,49 @@
-#include <util/delay.h>
-#include <stdbool.h>
+#include<util/delay.h>
+/* Include Header Files From LIB */
 #include "../LIB/STD_TYPES.h"
 #include "../LIB/BIT_MATH.h"
-#include "../MCAL/DIO/DIO_Interface.h"
-#include "../HAL/LED/LED_Interface.h"
-#include "../MCAL/TIMERS/TIMER0/TIMER0_Interface.h"
-#include "../MCAL/TIMERS/TIMER1/TIMER1_Interface.h"
-#include "../MCAL/GIE/GIE_Interface.h"
-#include "../MCAL/WDT/WDT_Interface.h"
-#include "../HAL/SERVO_MOTOR/SERVO_Interface.h"
+/* Include Header Files From MCAL Layer */
+#include"../MCAL/DIO/DIO_Interface.h"
+#include"../MCAL/GIE/GIE_Interface.h"
+#include"../MCAL/USART/USART_Interface.h"
+/* Include Header Files From HAL Layer */
+#include"../HAL/LED/LED_Interface.h"
+u8 Recieved = 0;
+void txIndication (void);
 
-void action1(void);
-int main(void)
+int main()
 {
-	// TIMER0_voidInit();
-	TIMER1_voidInit();
-	// GIE_void_GI_Enable(ON);
 
-	SERVO_voidRotateSpecificAngle_OC1A(90);
+	USART_voidInit ();
+	GIE_void_GI_Enable(ON);
+	LED_voidInit_Led_Pin(PORTC,PIN0);
+	LED_voidInit_Led_Pin(PORTC,PIN1);
+	DIO_voidSetPinValue(PORTC,PIN0,LOW);
+	USART_voidSendData('A');USART_voidSendData('h');USART_voidSendData('m');USART_voidSendData('e');USART_voidSendData('d');USART_voidSendData(' ');
+	USART_voidSendData('B');USART_voidSendData('a');USART_voidSendData('h');USART_voidSendData('a');USART_voidSendData('a');USART_voidSendData(' ');
+	USART_voidSendData('-');USART_voidSendData('-');USART_voidSendData('-');USART_voidSendData('>');USART_voidSendData('>');USART_voidSendData(' ');
+
+
 	while(1)
 	{
-		for(u8 i = 0; i < 180 ; i++)
+		// USART_voidSendData(',');
+		USART_voidAsyncSendData(',',txIndication);
+		_delay_ms(1000);
+		// USART_voidRecieveData(&Recieved);
+		USART_voidAsyncRecieveData (&Recieved);
+		if (Recieved == 's' )
 		{
-			SERVO_voidRotateSpecificAngle_OC1A(i);
-			_delay_ms(50);
+			DIO_voidSetPinValue(PORTC,PIN0,HIGH);
+			_delay_ms(100);
+			DIO_voidSetPinValue(PORTC,PIN0,LOW);
+			Recieved = 0 ;
 		}
 	}
-	return 0 ;
 }
 
-void action1(void)
+void txIndication (void)
 {
-	LED_voidToggle_Led_Pin(PORTC,PIN1);
+	DIO_voidSetPinValue(PORTC,PIN1,HIGH);
+	_delay_ms(100);
+	DIO_voidSetPinValue(PORTC,PIN1,LOW);
 }

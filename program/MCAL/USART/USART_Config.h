@@ -24,7 +24,7 @@
 #define     DOUBBLE_SPEED           0
 #define     NORMAL_SPEED            1
 /*===============================================*/
-#define     SPEED            DOUBBLE_SPEED
+#define     SPEED            NORMAL_SPEED
 /*===============================================*/
 
 /*===============================================*/

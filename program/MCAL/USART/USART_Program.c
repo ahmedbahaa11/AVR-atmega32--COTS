@@ -47,14 +47,14 @@ void USART_voidInit (void)
 /*--------------------------------------*/
     CLEAR_BIT(UBRRH_REG,UBRRH_URSEL);                    // access UBRRH to Configer the BAUD Rate
     u16 UBRR = 0 ;
-    #if( SPEED == NORMAL_SPEED )                         // U2X = 1  Normal Speed Transsmition
-        UBRR = ( CPU_CLK / ( BAUD_RATE * 8UL ) ) - 1 ;
-    #elif( SPEED == DOUBBLE_SPEED )                      // U2X = 0  Double Speed Transsmition
+    #if( SPEED == NORMAL_SPEED )                         // U2X = 0  Normal Speed Transsmition
         UBRR = ( CPU_CLK / ( BAUD_RATE * 16UL ) ) - 1 ;
-    #endif                                                      // UBRR = 0b1111000000110011
+    #elif( SPEED == DOUBBLE_SPEED )                      // U2X = 1  Double Speed Transsmition
+        UBRR = ( CPU_CLK / ( BAUD_RATE * 8UL ) ) - 1 ;
+    #endif                                                      // UBRR = 0bxxxx000000110011
     UBRRL_REG = (u8)(UBRR);                     // first 8 Bit  // (u8)UBRR = 0b00110011
-    UBRRH_REG = (u8)(UBRR >> 8);                // second 8 Bit // (UBRR >> 8 ) = 0b0000000011110000
-                                                                // (u8)(UBRR >> 8 ) = 0b11110000
+    UBRRH_REG = (u8)(UBRR >> 8);                // second 8 Bit // (UBRR >> 8 ) = 0b00000000xxxx0000
+                                                                // (u8)(UBRR >> 8 ) = 0bxxxx0000
 
 /*======================================*/
 /*        USART Initilization           */
@@ -181,6 +181,7 @@ void __vector_14 (void)    __attribute__((signal));
 void __vector_14 (void)
 { 
     UDR_REG = Global_u8TXData ;         // Transsmit Data.
+    CLEAR_BIT(UCSRB_REG,UCSRB_UDRIE);   // Disable UDRIE Data Register Empty Interrupt Enable. until send new data.
 }
 
 /*****************************************************************************/
@@ -192,5 +193,5 @@ void __vector_14 (void)
 void __vector_15 (void)    __attribute__((signal));
 void __vector_15 (void)
 {
-   Global_PF_Vector_15 () ; // Call App Function That Indicator to Transmittion Complete.
+    Global_PF_Vector_15 () ;           // Call App Function That Indicator to Transmittion Complete.
 }
